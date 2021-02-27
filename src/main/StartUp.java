@@ -1,5 +1,8 @@
 package main;
 
+import bussinessLogic.ManageArray;
+import interfaces.ArrayManager;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -28,8 +31,6 @@ public class StartUp {
     private char[] shuffledArray;
     // array for storing the letters needed in the practice phase
     private char[] practiceArray;
-    // Random object for shuffling
-    private static final Random RANDOM = new Random();
     // int for accessing the index of an array
     private int charArrayIndex = 0;
     // int for calculating how many times a letter is displayed in the evaluation
@@ -56,19 +57,20 @@ public class StartUp {
     private char typedChar;
     // int for storing the elapsed time
     private int time;
+    private static ArrayManager manageArray;
 
     // evaluate the typing speed for each character
-    public StartUp() {
+    public StartUp(ArrayManager manageArray) {
+        this.manageArray = manageArray;
         prepareGUI();
-        setCharArray(alphabetMultiplier);
-        shuffleCharArray(evaluationArray);
-        setNewCharMap();
+        manageArray.manageEvaluationData();
         runEvaluation();
 
     }
 
     public static void main(String[] args) {
-        new StartUp();
+
+        new StartUp(new ManageArray());
     }
 
     // prepare the GUI
@@ -95,46 +97,6 @@ public class StartUp {
         mainFrame.add(controlPanel);
         mainFrame.add(statusLabel);
         mainFrame.setVisible(true);
-    }
-
-    // generate an array containing all letters for a number of n times
-    private void setCharArray(int size) {
-        this.alphabetMultiplier = size;
-        evaluationArray = new char[numberOfLetters * alphabetMultiplier];
-        char character = 'a';
-
-        for (int i = 0; i <= evaluationArray.length - alphabetMultiplier; i += alphabetMultiplier) {
-            for (int k = i; k < i + alphabetMultiplier; k++) {
-                evaluationArray[k] = character;
-            }
-            character++;
-        }
-    }
-
-    // shuffle the array
-    private void shuffleCharArray(char[] charArray) {
-        this.shuffledArray = charArray;
-        int charArrayLength = shuffledArray.length;
-
-        while (charArrayLength > 1) {
-            int random = RANDOM.nextInt(charArrayLength--);
-            char tmp = shuffledArray[random];
-            shuffledArray[random] = shuffledArray[charArrayLength];
-            shuffledArray[charArrayLength] = tmp;
-        }
-    }
-
-    // creates a new charMap and ads the chars to the map
-    private void setNewCharMap() {
-        // Add elements to the map
-        currentChar = 'a';
-
-        for (int i = 0; i < numberOfLetters; i++) {
-            charString = Character.toString(currentChar);
-            charMap.put(charString, 0);
-            dividerMap.put(charString, 0);
-            currentChar++;
-        }
     }
 
     /*
@@ -199,13 +161,13 @@ public class StartUp {
     private void addTimeToMap(int time) {
         this.time = time;
         charString = Character.toString(typedChar);
-        int sum = charMap.get(charString) + time;
+        int sum = manageArray.getCharMap().get(charString) + time;
         charMap.put(charString, sum);
     }
 
     // how many times the time was added for the typed char
     private void addDividerToMap() {
-        int divider = dividerMap.get(charString);
+        int divider = manageArray.getDividerMap().get(charString);
         charString = Character.toString(typedChar);
         dividerMap.put(charString, divider + 1);
     }
@@ -264,7 +226,7 @@ public class StartUp {
 
     // display the chars and evaluate the typing
     private void runEvaluation() {
-        runProgram(shuffledArray);
+        runProgram(manageArray.getShuffledArray());
     }
 
     private void runPractice() {
@@ -272,9 +234,9 @@ public class StartUp {
         sortCharMap();
         setCharArrayFromSortedMap();
         // reset the charMap to store new data
-        setNewCharMap();
+        manageArray.setNewCharMap();
         setPracticeArray(charArrayFromSortedMap);
-        shuffleCharArray(practiceArray);
+        manageArray.shuffleCharArray(practiceArray);
         runProgram(shuffledArray);
     }
 }
