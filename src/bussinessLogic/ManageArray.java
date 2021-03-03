@@ -35,12 +35,18 @@ public class ManageArray implements ArrayManager {
     private LinkedHashMap<String, Integer> sortedMap;
 
 
+    /**
+     * TODO - Please add comment here.
+     */
     public void manageEvaluationData() {
         setCharArray(alphabetMultiplier);
         shuffleCharArray(evaluationArray);
         setNewCharMap();
     }
 
+    /**
+     * TODO - Please add comment here.
+     */
     public void managePracticeData() {
         calculateAverage();
         sortCharMap();
@@ -51,9 +57,11 @@ public class ManageArray implements ArrayManager {
         shuffleCharArray(practiceArray);
     }
 
-    // generate an array containing all letters for a number of alphabetMultiplier times
-    @Override
-    public void setCharArray(int alphabetMultiplier) {
+    /**
+     * generate an array containing all letters for a number of alphabetMultiplier times
+     * @param alphabetMultiplier
+     */
+    private void setCharArray(int alphabetMultiplier) {
         this.alphabetMultiplier = alphabetMultiplier;
         evaluationArray = new char[numberOfLetters * alphabetMultiplier];
         currentChar = 'a';
@@ -66,9 +74,11 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-    // shuffle the array
-    @Override
-    public void shuffleCharArray(char[] charArray) {
+    /**
+     * shuffle the array
+     * @param charArray
+     */
+    private void shuffleCharArray(char[] charArray) {
         this.shuffledArray = charArray;
         int charArrayLength = shuffledArray.length;
 
@@ -80,9 +90,10 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-    // creates a new charMap and ads the chars to the map
-    @Override
-    public void setNewCharMap() {
+    /**
+     * creates a new charMap and ads the chars to the map
+     */
+    private void setNewCharMap() {
         // Add elements to the map
         currentChar = 'a';
 
@@ -94,9 +105,10 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-    @Override
-    // calculates the average time for each char
-    public void calculateAverage() {
+    /**
+     * calculates the average time for each char
+     */
+    private void calculateAverage() {
         currentChar = 'a';
         int average;
 
@@ -108,9 +120,10 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-    @Override
-    // sort the charMap in ascending order
-    public void sortCharMap() {
+    /**
+     * sort the charMap in ascending order
+     */
+    private void sortCharMap() {
         // generate a new, empty sortedMap
         sortedMap = new LinkedHashMap<>();
         // arrayList for storing and sorting the chars
@@ -131,21 +144,20 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-    @Override
-
-    // transfer the sorted chars to a char array
-    public void setCharArrayFromSortedMap() {
+    /**
+     * transfer the sorted chars to a char array
+     */
+    private void setCharArrayFromSortedMap() {
         charArrayFromSortedMap = sortedMap.keySet().stream().map(String::valueOf).collect(Collectors.joining())
                 .toCharArray();
 
     }
 
-    @Override
-    /*
+    /**
      * generate an array with characters repeating proportionally to the reaction
      * time for each char
      */
-    public void setPracticeArray() {
+    private void setPracticeArray() {
 
         // calculate the size of the practiceArray
         int sizeOfPracticeArray = numberOfLetters * (numberOfLetters + 1) / 2;
@@ -162,23 +174,32 @@ public class ManageArray implements ArrayManager {
         }
     }
 
+    /**
+     * calculate how many times a char was deployed and store the result in a hashmap
+     * @param typedChar
+     */
     @Override
-    // calculate how many times a char was deployed and store the result in a hashmap
     public void addDividerToMap(char typedChar) {
         int divider = dividerMap.get(charString);
         charString = Character.toString(typedChar);
         dividerMap.put(charString, divider + 1);
     }
 
+    /**
+     * add the reaction time for the typed char
+     * @param elapsedTime
+     * @param typedChar
+     */
     @Override
-    // add the reaction time for the typed char
     public void addTimeToMap(int elapsedTime, char typedChar) {
         charString = Character.toString(typedChar);
         int sum = charMap.get(charString) + elapsedTime;
         charMap.put(charString, sum);
     }
 
-    // return the shuffled array
+    /**
+     * return the shuffled array
+     */
     @Override
     public char[] getShuffledArray() {
         return shuffledArray;
