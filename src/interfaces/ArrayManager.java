@@ -44,27 +44,6 @@ public interface ArrayManager {
     char[] getShuffledArray();
 
     /**
-     * calculates the average time for each char
-     */
-    void calculateAverage();
-
-    /**
-     * sort the charMap in ascending order
-     */
-    void sortCharMap();
-
-    /**
-     * transfer the sorted chars to a char array
-     */
-    void setCharArrayFromSortedMap();
-
-    /**
-     * generate an array with characters repeating proportionally to the reaction
-     * time for each char
-     */
-    void setPracticeArray();
-
-    /**
      * calculate how many times a char was deployed and store the result in a hashmap
      *
      * @param typedChar - the char that was received as input in the last keystroke
