@@ -33,7 +33,6 @@ public class StartUp {
     public StartUp(ArrayManager manageArray) {
         StartUp.manageArray = manageArray;
         prepareGUI();
-        manageArray.manageEvaluationData();
         runEvaluation();
 
     }
@@ -121,6 +120,7 @@ public class StartUp {
 
     // display the chars and evaluate the typing
     private void runEvaluation() {
+        manageArray.manageEvaluationData();
         runProgram(manageArray.getShuffledArray());
     }
 
