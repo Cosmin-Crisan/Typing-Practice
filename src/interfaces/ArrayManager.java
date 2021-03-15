@@ -24,19 +24,25 @@ public interface ArrayManager {
      *
      * @param alphabetMultiplier - the number of times each letter is repeated in the array.
      */
-    void setCharArray(int alphabetMultiplier);
+    private void setCharArray(int alphabetMultiplier) {
+
+    }
 
     /**
      * shuffle the array
      *
      * @param charArray - the array that needs to be shuffled
      */
-    void shuffleCharArray(char[] charArray);
+    private void shuffleCharArray(char[] charArray) {
+
+    }
 
     /**
      * create a new charMap and add the chars to the map
      */
-    void setNewCharMap();
+    private void setNewCharMap() {
+
+    }
 
     /**
      * return the shuffled array

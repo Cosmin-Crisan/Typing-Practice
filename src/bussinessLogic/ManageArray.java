@@ -36,7 +36,7 @@ public class ManageArray implements ArrayManager {
 
 
     /**
-     * TODO - Please add comment here.
+     * prepare all the data necessary for the evaluation phase
      */
     public void manageEvaluationData() {
         setCharArray(alphabetMultiplier);
@@ -45,7 +45,7 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * TODO - Please add comment here.
+     * prepare all the data necessary for the evaluation phase 
      */
     public void managePracticeData() {
         calculateAverage();
