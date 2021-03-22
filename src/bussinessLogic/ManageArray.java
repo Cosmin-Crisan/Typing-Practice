@@ -1,6 +1,7 @@
 package bussinessLogic;
 
 import interfaces.ArrayManager;
+import interfaces.MapManager;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,8 +33,37 @@ public class ManageArray implements ArrayManager {
     // current char
     private char currentChar;
     // hash map for storing and recording the sorted chars
-    private LinkedHashMap<String, Integer> sortedMap;
+    private static MapManager manageMap = new MapManager() {
+        @Override
+        public void sortCharMap() {
 
+        }
+
+        @Override
+        public LinkedHashMap<String, Integer> getSortedMap() {
+            return null;
+        }
+
+        @Override
+        public void addDividerToMap(char typedChar) {
+
+        }
+
+        @Override
+        public void addTimeToMap(int elapsedTime, char typedChar) {
+
+        }
+
+        @Override
+        public LinkedHashMap<String, Integer> getCharMap() {
+            return null;
+        }
+
+        @Override
+        public LinkedHashMap<String, Integer> getDividerMap() {
+            return null;
+        }
+    };
 
     /**
      * prepare all the data necessary for the evaluation phase
@@ -41,7 +71,7 @@ public class ManageArray implements ArrayManager {
     public void manageEvaluationData() {
         setCharArray(alphabetMultiplier);
         shuffleCharArray(evaluationArray);
-        setNewCharMap();
+        manageMap.setNewCharMap();
     }
 
     /**
@@ -49,10 +79,10 @@ public class ManageArray implements ArrayManager {
      */
     public void managePracticeData() {
         calculateAverage();
-        sortCharMap();
+        manageMap.sortCharMap();
         setCharArrayFromSortedMap();
         // reset the charMap to store new data
-        setNewCharMap();
+        manageMap.setNewCharMap();
         setPracticeArray();
         shuffleCharArray(practiceArray);
     }
@@ -91,21 +121,6 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * creates a new charMap and ads the chars to the map
-     */
-    private void setNewCharMap() {
-        // Add elements to the map
-        currentChar = 'a';
-
-        for (int i = 0; i < numberOfLetters; i++) {
-            charString = Character.toString(currentChar);
-            charMap.put(charString, 0);
-            dividerMap.put(charString, 0);
-            currentChar++;
-        }
-    }
-
-    /**
      * calculates the average time for each char
      */
     private void calculateAverage() {
@@ -114,41 +129,19 @@ public class ManageArray implements ArrayManager {
 
         for (int i = 0; i < numberOfLetters; i++) {
             charString = Character.toString(currentChar);
-            average = charMap.get(charString) / dividerMap.get(charString);
+            average = manageMap.getCharMap().get(charString) / manageMap.getDividerMap().get(charString);
             charMap.put(charString, average);
             currentChar++;
         }
     }
 
-    /**
-     * sort the charMap in ascending order
-     */
-    private void sortCharMap() {
-        // generate a new, empty sortedMap
-        sortedMap = new LinkedHashMap<>();
-        // arrayList for storing and sorting the chars
-        ArrayList<Integer> charList = new ArrayList<>();
-        // transfer the chars from charMap to charList
-        for (Map.Entry<String, Integer> entry : charMap.entrySet()) {
-            charList.add(entry.getValue());
-        }
-        // rank the chars by typing speed (fastest to slowest)
-        Collections.sort(charList);
-        // transfer the ranked list to sortedMap
-        for (int num : charList) {
-            for (Map.Entry<String, Integer> entry : charMap.entrySet()) {
-                if (entry.getValue().equals(num)) {
-                    sortedMap.put(entry.getKey(), num);
-                }
-            }
-        }
-    }
+
 
     /**
      * transfer the sorted chars to a char array
      */
     private void setCharArrayFromSortedMap() {
-        charArrayFromSortedMap = sortedMap.keySet().stream().map(String::valueOf).collect(Collectors.joining())
+        charArrayFromSortedMap = manageMap.getSortedMap().keySet().stream().map(String::valueOf).collect(Collectors.joining())
                 .toCharArray();
 
     }
@@ -172,29 +165,6 @@ public class ManageArray implements ArrayManager {
                 index++;
             }
         }
-    }
-
-    /**
-     * calculate how many times a char was deployed and store the result in a hashmap
-     * @param typedChar
-     */
-    @Override
-    public void addDividerToMap(char typedChar) {
-        int divider = dividerMap.get(charString);
-        charString = Character.toString(typedChar);
-        dividerMap.put(charString, divider + 1);
-    }
-
-    /**
-     * add the reaction time for the typed char
-     * @param elapsedTime
-     * @param typedChar
-     */
-    @Override
-    public void addTimeToMap(int elapsedTime, char typedChar) {
-        charString = Character.toString(typedChar);
-        int sum = charMap.get(charString) + elapsedTime;
-        charMap.put(charString, sum);
     }
 
     /**

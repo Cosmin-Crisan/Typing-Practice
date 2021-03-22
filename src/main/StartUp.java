@@ -2,6 +2,7 @@ package main;
 
 import bussinessLogic.ManageArray;
 import interfaces.ArrayManager;
+import interfaces.MapManager;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -10,9 +11,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.LinkedHashMap;
 
 public class StartUp {
     private static ArrayManager manageArray;
+
     private final TextField textField = new TextField(10);
     // generate a start and end Instant for calculating the elapsed time
     Instant start = Instant.now(), end = Instant.now();
@@ -92,8 +95,8 @@ public class StartUp {
                 if (typedChar == array[charArrayIndex]) {
 
                     calculateElapsedTime(start, end);
-                    manageArray.addTimeToMap(elapsedTime, typedChar);
-                    manageArray.addDividerToMap(typedChar);
+                    manageMap.addTimeToMap(elapsedTime, typedChar);
+                    manageMap.addDividerToMap(typedChar);
                     charArrayIndex++;
 
                     if (charArrayIndex >= array.length) {
