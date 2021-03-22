@@ -1,30 +1,31 @@
 package bussinessLogic;
 
+import interfaces.MapManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ManageMap {
-    // current char
-    private char currentChar;
+public class ManageMap implements MapManager {
     // the number of letters in the alphabet
     private final int numberOfLetters = 3;
-    // create a string to store the chars when needed as string
-    private String charString;
     // empty hash map for storing the alphabet and adding the reaction time for each
     // character
-    private final LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
+    LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
     // hash map for storing the number of times a char is displayed (needed for
     // calculating the average)
-    private final LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
-
-    private LinkedHashMap<String, Integer> sortedMap;
+    LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
+    LinkedHashMap<String, Integer> sortedMap;
+    // current char
+    private char currentChar;
+    // create a string to store the chars when needed as string
+    private String charString;
 
     /**
      * creates a new charMap and ads the chars to the map
      */
-    private void setNewCharMap() {
+    public void setNewCharMap() {
         // Add elements to the map
         currentChar = 'a';
 
@@ -39,7 +40,7 @@ public class ManageMap {
     /**
      * sort the charMap in ascending order
      */
-    private void sortCharMap() {
+    public void sortCharMap() {
         // generate a new, empty sortedMap
         sortedMap = new LinkedHashMap<>();
         // arrayList for storing and sorting the chars
@@ -61,9 +62,9 @@ public class ManageMap {
     }
 
 
-
     /**
      * calculate how many times a char was deployed and store the result in a hashmap
+     *
      * @param typedChar
      */
 
@@ -75,6 +76,7 @@ public class ManageMap {
 
     /**
      * add the reaction time for the typed char
+     *
      * @param elapsedTime
      * @param typedChar
      */
@@ -84,13 +86,15 @@ public class ManageMap {
         charMap.put(charString, sum);
     }
 
-    public LinkedHashMap<String, Integer> getSortedMap(){
+    public LinkedHashMap<String, Integer> getSortedMap() {
         return sortedMap;
     }
-    public LinkedHashMap<String, Integer> getCharMap(){
+
+    public LinkedHashMap<String, Integer> getCharMap() {
         return charMap;
     }
-    public LinkedHashMap<String, Integer> getDividerMap(){
+
+    public LinkedHashMap<String, Integer> getDividerMap() {
         return dividerMap;
     }
 }

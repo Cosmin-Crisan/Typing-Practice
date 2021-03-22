@@ -1,20 +1,17 @@
 package interfaces;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public interface MapManager {
     /**
      * create a new charMap and add the chars to the map
      */
-    default void setNewCharMap() {
+    void setNewCharMap();
 
-    }
-
+    /**
+     * sort the charMap in ascending order
+     */
     void sortCharMap();
-
-    LinkedHashMap<String, Integer> getSortedMap();
-
 
     /**
      * calculate how many times a char was deployed and store the result in a hashmap
@@ -27,10 +24,22 @@ public interface MapManager {
      * add the reaction time for the typed char
      *
      * @param elapsedTime - the time that elapsed between
-     * @param typedChar - the char that was received as input in the last keystroke
+     * @param typedChar   - the char that was received as input in the last keystroke
      */
     void addTimeToMap(int elapsedTime, char typedChar);
 
+    /**
+     * return the sortedMap
+     */
+    LinkedHashMap<String, Integer> getSortedMap();
+
+    /**
+     * return the charMap
+     */
     LinkedHashMap<String, Integer> getCharMap();
+
+    /**
+     * return the dividerMap
+     */
     LinkedHashMap<String, Integer> getDividerMap();
 }

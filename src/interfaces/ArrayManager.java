@@ -10,12 +10,12 @@ package interfaces;
  */
 public interface ArrayManager {
     /**
-     *
+     * prepare all the data necessary for the evaluation phase
      */
     void manageEvaluationData();
 
     /**
-     *
+     * prepare all the data necessary for the practice phase
      */
     void managePracticeData();
 

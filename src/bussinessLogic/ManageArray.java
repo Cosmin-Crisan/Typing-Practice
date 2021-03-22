@@ -3,7 +3,8 @@ package bussinessLogic;
 import interfaces.ArrayManager;
 import interfaces.MapManager;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ManageArray implements ArrayManager {
@@ -17,6 +18,8 @@ public class ManageArray implements ArrayManager {
     // hash map for storing the number of times a char is displayed (needed for
     // calculating the average)
     private final LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
+    // hash map for storing and recording the sorted chars
+    private final MapManager manageMap;
     // int for calculating how many times a letter is displayed in the evaluation
     // sequence
     private int alphabetMultiplier = 1;
@@ -32,38 +35,10 @@ public class ManageArray implements ArrayManager {
     private String charString;
     // current char
     private char currentChar;
-    // hash map for storing and recording the sorted chars
-    private static MapManager manageMap = new MapManager() {
-        @Override
-        public void sortCharMap() {
 
-        }
-
-        @Override
-        public LinkedHashMap<String, Integer> getSortedMap() {
-            return null;
-        }
-
-        @Override
-        public void addDividerToMap(char typedChar) {
-
-        }
-
-        @Override
-        public void addTimeToMap(int elapsedTime, char typedChar) {
-
-        }
-
-        @Override
-        public LinkedHashMap<String, Integer> getCharMap() {
-            return null;
-        }
-
-        @Override
-        public LinkedHashMap<String, Integer> getDividerMap() {
-            return null;
-        }
-    };
+    public ManageArray(MapManager manageMap) {
+        this.manageMap = manageMap;
+    }
 
     /**
      * prepare all the data necessary for the evaluation phase
@@ -75,7 +50,7 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * prepare all the data necessary for the evaluation phase 
+     * prepare all the data necessary for the practice phase
      */
     public void managePracticeData() {
         calculateAverage();
@@ -89,6 +64,7 @@ public class ManageArray implements ArrayManager {
 
     /**
      * generate an array containing all letters for a number of alphabetMultiplier times
+     *
      * @param alphabetMultiplier
      */
     private void setCharArray(int alphabetMultiplier) {
@@ -106,6 +82,7 @@ public class ManageArray implements ArrayManager {
 
     /**
      * shuffle the array
+     *
      * @param charArray
      */
     private void shuffleCharArray(char[] charArray) {
@@ -134,7 +111,6 @@ public class ManageArray implements ArrayManager {
             currentChar++;
         }
     }
-
 
 
     /**

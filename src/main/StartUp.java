@@ -1,9 +1,8 @@
 package main;
-
 import bussinessLogic.ManageArray;
+import bussinessLogic.ManageMap;
 import interfaces.ArrayManager;
 import interfaces.MapManager;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,10 +10,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.LinkedHashMap;
 
 public class StartUp {
-    private static ArrayManager manageArray;
+    private static final MapManager manageMap = new ManageMap();
+    private static final ArrayManager manageArray = new ManageArray(manageMap);
 
     private final TextField textField = new TextField(10);
     // generate a start and end Instant for calculating the elapsed time
@@ -33,16 +32,13 @@ public class StartUp {
     private int elapsedTime;
 
     // evaluate the typing speed for each character
-    public StartUp(ArrayManager manageArray) {
-        StartUp.manageArray = manageArray;
+    public StartUp() {
         prepareGUI();
         runEvaluation();
-
     }
 
     public static void main(String[] args) {
-
-        new StartUp(new ManageArray());
+        new StartUp();
     }
 
     // prepare the GUI
