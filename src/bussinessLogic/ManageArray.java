@@ -15,9 +15,6 @@ public class ManageArray implements ArrayManager {
     // empty hash map for storing the alphabet and adding the reaction time for each
     // character
     private final LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
-    // hash map for storing the number of times a char is displayed (needed for
-    // calculating the average)
-    private final LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
     // hash map for storing and recording the sorted chars
     private final MapManager manageMap;
     // int for calculating how many times a letter is displayed in the evaluation
@@ -36,6 +33,11 @@ public class ManageArray implements ArrayManager {
     // current char
     private char currentChar;
 
+    /**
+     * constructor of the manageArray class
+     *
+     * @param manageMap
+     */
     public ManageArray(MapManager manageMap) {
         this.manageMap = manageMap;
     }

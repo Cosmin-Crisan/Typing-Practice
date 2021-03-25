@@ -86,14 +86,29 @@ public class ManageMap implements MapManager {
         charMap.put(charString, sum);
     }
 
+    /**
+     * getter method to return the sorted map
+     *
+     * @return
+     */
     public LinkedHashMap<String, Integer> getSortedMap() {
         return sortedMap;
     }
 
+    /**
+     * getter method to return the charMap
+     *
+     * @return
+     */
     public LinkedHashMap<String, Integer> getCharMap() {
         return charMap;
     }
 
+    /**
+     * getter method to return the dividerMap
+     *
+     * @return
+     */
     public LinkedHashMap<String, Integer> getDividerMap() {
         return dividerMap;
     }
