@@ -17,9 +17,6 @@ public class ManageArray implements ArrayManager {
     private final LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
     // hash map for storing and recording the sorted chars
     private final MapManager manageMap;
-    // int for calculating how many times a letter is displayed in the evaluation
-    // sequence
-    private int alphabetMultiplier = 1;
     // array for storing the letters needed in the evaluation phase
     private char[] evaluationArray;
     // array to store the shuffled letters
@@ -43,15 +40,6 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * prepare all the data necessary for the evaluation phase
-     */
-    public void manageEvaluationData() {
-        setCharArray(alphabetMultiplier);
-        shuffleCharArray(evaluationArray);
-        manageMap.setNewCharMap();
-    }
-
-    /**
      * prepare all the data necessary for the practice phase
      */
     public void managePracticeData() {
@@ -69,8 +57,7 @@ public class ManageArray implements ArrayManager {
      *
      * @param alphabetMultiplier
      */
-    private void setCharArray(int alphabetMultiplier) {
-        this.alphabetMultiplier = alphabetMultiplier;
+    public void setEvaluationArray(int alphabetMultiplier) {
         evaluationArray = new char[numberOfLetters * alphabetMultiplier];
         currentChar = 'a';
 
@@ -87,7 +74,7 @@ public class ManageArray implements ArrayManager {
      *
      * @param charArray
      */
-    private void shuffleCharArray(char[] charArray) {
+    public void shuffleCharArray(char[] charArray) {
         this.shuffledArray = charArray;
         int charArrayLength = shuffledArray.length;
 
@@ -143,6 +130,14 @@ public class ManageArray implements ArrayManager {
                 index++;
             }
         }
+    }
+
+    /**
+     * return the evaluation array
+     */
+    @Override
+    public char[] getEvaluationArray() {
+        return evaluationArray;
     }
 
     /**

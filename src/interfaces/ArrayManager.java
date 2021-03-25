@@ -9,10 +9,6 @@ package interfaces;
  * Creates arrays and manages array data.
  */
 public interface ArrayManager {
-    /**
-     * prepare all the data necessary for the evaluation phase
-     */
-    void manageEvaluationData();
 
     /**
      * prepare all the data necessary for the practice phase
@@ -24,7 +20,7 @@ public interface ArrayManager {
      *
      * @param alphabetMultiplier - the number of times each letter is repeated in the array.
      */
-    private void setCharArray(int alphabetMultiplier) {
+    public default void setEvaluationArray(int alphabetMultiplier) {
 
     }
 
@@ -33,9 +29,14 @@ public interface ArrayManager {
      *
      * @param charArray - the array that needs to be shuffled
      */
-    private void shuffleCharArray(char[] charArray) {
+    public default void shuffleCharArray(char[] charArray) {
 
     }
+
+    /**
+     * return the evaluation array
+     */
+    public char[] getEvaluationArray();
 
     /**
      * return the shuffled array

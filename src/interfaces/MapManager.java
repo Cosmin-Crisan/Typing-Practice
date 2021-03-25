@@ -1,5 +1,11 @@
 package interfaces;
 
+/**
+ * @author cosmin.crisan
+ *
+ * Creates maps and manages map data.
+ */
+
 import java.util.LinkedHashMap;
 
 public interface MapManager {
