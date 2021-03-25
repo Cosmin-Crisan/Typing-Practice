@@ -40,19 +40,6 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * prepare all the data necessary for the practice phase
-     */
-    public void managePracticeData() {
-        calculateAverage();
-        manageMap.sortCharMap();
-        setCharArrayFromSortedMap();
-        // reset the charMap to store new data
-        manageMap.setNewCharMap();
-        setPracticeArray();
-        shuffleCharArray(practiceArray);
-    }
-
-    /**
      * generate an array containing all letters for a number of alphabetMultiplier times
      *
      * @param alphabetMultiplier
@@ -89,7 +76,7 @@ public class ManageArray implements ArrayManager {
     /**
      * calculates the average time for each char
      */
-    private void calculateAverage() {
+    public void calculateAverage() {
         currentChar = 'a';
         int average;
 
@@ -101,11 +88,10 @@ public class ManageArray implements ArrayManager {
         }
     }
 
-
     /**
      * transfer the sorted chars to a char array
      */
-    private void setCharArrayFromSortedMap() {
+    public void setCharArrayFromSortedMap() {
         charArrayFromSortedMap = manageMap.getSortedMap().keySet().stream().map(String::valueOf).collect(Collectors.joining())
                 .toCharArray();
 
@@ -115,7 +101,7 @@ public class ManageArray implements ArrayManager {
      * generate an array with characters repeating proportionally to the reaction
      * time for each char
      */
-    private void setPracticeArray() {
+    public void setPracticeArray() {
 
         // calculate the size of the practiceArray
         int sizeOfPracticeArray = numberOfLetters * (numberOfLetters + 1) / 2;
@@ -147,6 +133,12 @@ public class ManageArray implements ArrayManager {
     public char[] getShuffledArray() {
         return shuffledArray;
     }
+
+    /**
+     * return the practice array
+     */
+    @Override
+    public char[] getPracticeArray(){return practiceArray;}
 
 
 }

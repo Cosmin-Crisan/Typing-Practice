@@ -24,4 +24,17 @@ public class ManageData implements DataManager {
         manageArray.shuffleCharArray(manageArray.getEvaluationArray());
         manageMap.setNewCharMap();
     }
+
+    /**
+     * prepare all the data necessary for the practice phase
+     */
+    public void managePracticeData() {
+        manageArray.calculateAverage();
+        manageMap.sortCharMap();
+        manageArray.setCharArrayFromSortedMap();
+        // reset the charMap to store new data
+        manageMap.setNewCharMap();
+        manageArray.setPracticeArray();
+        manageArray.shuffleCharArray(manageArray.getPracticeArray());
+    }
 }

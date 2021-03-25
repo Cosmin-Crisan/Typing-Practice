@@ -128,7 +128,7 @@ public class StartUp {
     }
 
     private void runPractice() {
-        manageArray.managePracticeData();
+        manageData.managePracticeData();
         runProgram(manageArray.getShuffledArray());
     }
 }
