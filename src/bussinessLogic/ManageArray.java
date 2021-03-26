@@ -75,6 +75,7 @@ public class ManageArray implements ArrayManager {
 
     /**
      * calculates the average time for each char
+     * TODO - This shall be moved in ManageMap
      */
     public void calculateAverage() {
         currentChar = 'a';
@@ -90,6 +91,7 @@ public class ManageArray implements ArrayManager {
 
     /**
      * transfer the sorted chars to a char array
+     * TODO - Pass SortedMap to the method instead of requesting it from the method
      */
     public void setCharArrayFromSortedMap() {
         charArrayFromSortedMap = manageMap.getSortedMap().keySet().stream().map(String::valueOf).collect(Collectors.joining())
@@ -110,6 +112,7 @@ public class ManageArray implements ArrayManager {
         // set index
         int index = 0;
 
+        //TODO - add comment here
         for (int i = 0; i < charArrayFromSortedMap.length; i++) {
             for (int j = 0; j <= i; j++) {
                 practiceArray[index] = charArrayFromSortedMap[i];
