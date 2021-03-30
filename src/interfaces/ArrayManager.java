@@ -12,10 +12,8 @@ public interface ArrayManager {
 
     /**
      * generate an array containing all letters for a number of alphabetMultiplier times
-     *
-     * @param alphabetMultiplier - the number of times each letter is repeated in the array.
      */
-    public void setEvaluationArray(int alphabetMultiplier);
+    public void setEvaluationArray();
 
     /**
      * shuffle the array
@@ -23,11 +21,6 @@ public interface ArrayManager {
      * @param charArray - the array that needs to be shuffled
      */
     public void shuffleCharArray(char[] charArray);
-
-    /**
-     * calculates the average time for each char
-     */
-    public void calculateAverage();
 
     /**
      * transfer the sorted chars to a char array

@@ -35,6 +35,11 @@ public interface MapManager {
     void addTimeToMap(int elapsedTime, char typedChar);
 
     /**
+     * calculates the average time for each char
+     */
+    public void calculateAverage();
+
+    /**
      * return the sortedMap
      */
     LinkedHashMap<String, Integer> getSortedMap();

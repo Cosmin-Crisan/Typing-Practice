@@ -87,6 +87,21 @@ public class ManageMap implements MapManager {
     }
 
     /**
+     * calculates the average time for each char and stores it in charMap
+     */
+    public void calculateAverage() {
+        currentChar = 'a';
+        int average;
+
+        for (int i = 0; i < numberOfLetters; i++) {
+            charString = Character.toString(currentChar);
+            average = charMap.get(charString) / dividerMap.get(charString);
+            charMap.put(charString, average);
+            currentChar++;
+        }
+    }
+
+    /**
      * getter method to return the sorted map
      *
      * @return

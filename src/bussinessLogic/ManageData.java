@@ -7,9 +7,6 @@ import interfaces.MapManager;
 public class ManageData implements DataManager {
     private final MapManager manageMap;
     private final ArrayManager manageArray;
-    // int for calculating how many times a letter is displayed in the evaluation
-    // sequence
-    private int alphabetMultiplier = 1;
 
     public ManageData(ArrayManager manageArray, MapManager manageMap) {
         this.manageArray = manageArray;
@@ -20,21 +17,21 @@ public class ManageData implements DataManager {
      * prepare all the data necessary for the evaluation phase
      */
     public void manageEvaluationData() {
-        manageArray.setEvaluationArray(alphabetMultiplier);
-        manageArray.shuffleCharArray(manageArray.getEvaluationArray());
-        manageMap.setNewCharMap();
+        this.manageArray.setEvaluationArray();
+        this.manageArray.shuffleCharArray(manageArray.getEvaluationArray());
+        this.manageMap.setNewCharMap();
     }
 
     /**
      * prepare all the data necessary for the practice phase
      */
     public void managePracticeData() {
-        manageArray.calculateAverage();
-        manageMap.sortCharMap();
-        manageArray.setCharArrayFromSortedMap();
+        this.manageMap.calculateAverage();
+        this.manageMap.sortCharMap();
+        this.manageArray.setCharArrayFromSortedMap();
         // reset the charMap to store new data
-        manageMap.setNewCharMap();
-        manageArray.setPracticeArray();
-        manageArray.shuffleCharArray(manageArray.getPracticeArray());
+        this.manageMap.setNewCharMap();
+        this.manageArray.setPracticeArray();
+        this.manageArray.shuffleCharArray(manageArray.getPracticeArray());
     }
 }
