@@ -1,27 +1,26 @@
 package bussinessLogic;
 
 import interfaces.ArrayManager;
+import interfaces.ConstantsInterface;
 import interfaces.MapManager;
 
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ManageArray implements ArrayManager {
     // Random object for shuffling
     private static final Random RANDOM = new Random();
-    // the number of letters in the alphabet
-    private final int numberOfLetters = 3;
+    private ConstantsInterface constant;
+    // numberOfLetters in the alphabet
+    private int numberOfLetters;
     // int for calculating how many times a letter is displayed in the evaluation
     // sequence
-    private int alphabetMultiplier = 1;
-    // empty hash map for storing the alphabet and adding the reaction time for each
-    // character
-    private final LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
+    private int alphabetMultiplier;
     // hash map for storing and recording the sorted chars
     private final MapManager manageMap;
     // array for storing the letters needed in the evaluation phase
-    private char[] evaluationArray = new char[numberOfLetters * alphabetMultiplier];
+    private char[] evaluationArray;
     // array to store the shuffled letters
     private char[] shuffledArray;
     // array for transferring the chars from the sorted map and displaying them on
@@ -38,8 +37,12 @@ public class ManageArray implements ArrayManager {
      *
      * @param manageMap
      */
-    public ManageArray(MapManager manageMap) {
+    public ManageArray(MapManager manageMap, ConstantsInterface constant) {
         this.manageMap = manageMap;
+        this.constant = constant;
+        this. numberOfLetters = constant.getNumberOfLetters();
+        this.alphabetMultiplier = constant.getAlphabetMultiplier();
+        this.evaluationArray = new char[numberOfLetters * alphabetMultiplier];
     }
 
     /**
@@ -54,7 +57,8 @@ public class ManageArray implements ArrayManager {
                 evaluationArray[k] = currentChar;
             }
             currentChar++;
-        }
+        }     System.out.println(Arrays.toString(evaluationArray));
+
     }
 
     /**

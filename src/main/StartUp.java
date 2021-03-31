@@ -1,8 +1,10 @@
 package main;
+import bussinessLogic.Constants;
 import bussinessLogic.ManageArray;
 import bussinessLogic.ManageData;
 import bussinessLogic.ManageMap;
 import interfaces.ArrayManager;
+import interfaces.ConstantsInterface;
 import interfaces.DataManager;
 import interfaces.MapManager;
 import java.awt.*;
@@ -14,9 +16,9 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class StartUp {
-
+    private static final ConstantsInterface constant = new Constants();
     private static final MapManager manageMap = new ManageMap();
-    private static final ArrayManager manageArray = new ManageArray(manageMap);
+    private static final ArrayManager manageArray = new ManageArray(manageMap, constant);
     private static final DataManager manageData = new ManageData(manageArray, manageMap);
 
     private static final TextField textField = new TextField(10);
@@ -32,8 +34,6 @@ public class StartUp {
     private static int charArrayIndex = 0;
     // char for storing the current typed char
     private static char typedChar;
-    // int for storing the elapsed time
-    private static int elapsedTime;
 
     public static void main(String[] args) {
         prepareGUI();
@@ -70,9 +70,9 @@ public class StartUp {
 
 
     // calculates the reaction time
-    private static void calculateElapsedTime(Instant start, Instant end) {
+    private static int calculateElapsedTime(Instant start, Instant end) {
         Duration timeElapsed = Duration.between(start, end);
-        elapsedTime = (int) timeElapsed.toMillis();
+        return (int) timeElapsed.toMillis();
     }
 
 
@@ -88,8 +88,7 @@ public class StartUp {
 
                 if (typedChar == array[charArrayIndex]) {
 
-                    calculateElapsedTime(start, end);
-                    manageMap.addTimeToMap(elapsedTime, typedChar);
+                    manageMap.addTimeToMap(calculateElapsedTime(start, end), typedChar);
                     manageMap.addDividerToMap(typedChar);
                     charArrayIndex++;
 
