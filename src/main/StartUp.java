@@ -1,7 +1,9 @@
 package main;
 import bussinessLogic.ManageArray;
+import bussinessLogic.ManageData;
 import bussinessLogic.ManageMap;
 import interfaces.ArrayManager;
+import interfaces.DataManager;
 import interfaces.MapManager;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -12,37 +14,35 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class StartUp {
+
     private static final MapManager manageMap = new ManageMap();
     private static final ArrayManager manageArray = new ManageArray(manageMap);
+    private static final DataManager manageData = new ManageData(manageArray, manageMap);
 
-    private final TextField textField = new TextField(10);
+    private static final TextField textField = new TextField(10);
     // generate a start and end Instant for calculating the elapsed time
-    Instant start = Instant.now(), end = Instant.now();
+    static Instant start = Instant.now(), end = Instant.now();
     // the frame
-    private Frame mainFrame;
+    private static Frame mainFrame;
     // label for displaying the letters
-    private Label headerLabel;
+    private static Label headerLabel;
     // add panel
-    private Panel controlPanel;
+    private static Panel controlPanel;
     // int for accessing the index of an array
-    private int charArrayIndex = 0;
+    private static int charArrayIndex = 0;
     // char for storing the current typed char
-    private char typedChar;
+    private static char typedChar;
     // int for storing the elapsed time
-    private int elapsedTime;
+    private static int elapsedTime;
 
-    // evaluate the typing speed for each character
-    public StartUp() {
+    public static void main(String[] args) {
         prepareGUI();
+        // evaluate the typing speed for each character
         runEvaluation();
     }
 
-    public static void main(String[] args) {
-        new StartUp();
-    }
-
     // prepare the GUI
-    private void prepareGUI() {
+    private static void prepareGUI() {
         mainFrame = new Frame("Typing Practice");
         mainFrame.setSize(400, 400);
         mainFrame.setLayout(new GridLayout(3, 1));
@@ -70,16 +70,14 @@ public class StartUp {
 
 
     // calculates the reaction time
-    private void calculateElapsedTime(Instant start, Instant end) {
-        this.start = start;
-        this.end = end;
+    private static void calculateElapsedTime(Instant start, Instant end) {
         Duration timeElapsed = Duration.between(start, end);
         elapsedTime = (int) timeElapsed.toMillis();
     }
 
 
-    private void runProgram(char[] array) {
-
+    private static void runProgram(char[] array) {
+        //display the text that needs to be typed
         headerLabel.setText(String.valueOf(array[charArrayIndex]));
 
         textField.addKeyListener(new KeyAdapter() {
@@ -118,13 +116,13 @@ public class StartUp {
     }
 
     // display the chars and evaluate the typing
-    private void runEvaluation() {
-        manageArray.manageEvaluationData();
+    private static void runEvaluation() {
+        manageData.manageEvaluationData();
         runProgram(manageArray.getShuffledArray());
     }
 
-    private void runPractice() {
-        manageArray.managePracticeData();
+    private static void runPractice() {
+        manageData.managePracticeData();
         runProgram(manageArray.getShuffledArray());
     }
 }

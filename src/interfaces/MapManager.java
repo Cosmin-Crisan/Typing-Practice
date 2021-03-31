@@ -1,5 +1,11 @@
 package interfaces;
 
+/**
+ * @author cosmin.crisan
+ *
+ * Creates maps and manages map data.
+ */
+
 import java.util.LinkedHashMap;
 
 public interface MapManager {
@@ -27,6 +33,11 @@ public interface MapManager {
      * @param typedChar   - the char that was received as input in the last keystroke
      */
     void addTimeToMap(int elapsedTime, char typedChar);
+
+    /**
+     * calculates the average time for each char
+     */
+    public void calculateAverage();
 
     /**
      * return the sortedMap
