@@ -32,8 +32,6 @@ public class StartUp {
     private static Panel controlPanel;
     // int for accessing the index of an array
     private static int charArrayIndex = 0;
-    // char for storing the current typed char
-    private static char typedChar;
 
     public static void main(String[] args) {
         prepareGUI();
@@ -83,7 +81,7 @@ public class StartUp {
         textField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
 
-                typedChar = e.getKeyChar();
+                char typedChar = e.getKeyChar();
                 end = Instant.now();
 
                 if (typedChar == array[charArrayIndex]) {
