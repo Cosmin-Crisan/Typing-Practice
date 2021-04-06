@@ -60,6 +60,7 @@ public class StartUp {
         mainFrame.add(headerLabel);
         mainFrame.add(controlPanel);
         mainFrame.add(statusLabel);
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 
