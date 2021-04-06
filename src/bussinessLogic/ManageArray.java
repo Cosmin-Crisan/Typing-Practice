@@ -1,7 +1,6 @@
 package bussinessLogic;
 
 import interfaces.ArrayManager;
-import interfaces.ConstantsInterface;
 import interfaces.MapManager;
 
 import java.util.Arrays;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 public class ManageArray implements ArrayManager {
     // Random object for shuffling
     private static final Random RANDOM = new Random();
-    private ConstantsInterface constant;
     // numberOfLetters in the alphabet
     private int numberOfLetters;
     // int for calculating how many times a letter is displayed in the evaluation
@@ -37,11 +35,10 @@ public class ManageArray implements ArrayManager {
      *
      * @param manageMap
      */
-    public ManageArray(MapManager manageMap, ConstantsInterface constant) {
+    public ManageArray(MapManager manageMap) {
         this.manageMap = manageMap;
-        this.constant = constant;
-        this. numberOfLetters = constant.getNumberOfLetters();
-        this.alphabetMultiplier = constant.getAlphabetMultiplier();
+        this. numberOfLetters = Constants.NUMBER_OF_LETTERS;
+        this.alphabetMultiplier = Constants.ALPHABETMULTIPLIER;
         this.evaluationArray = new char[numberOfLetters * alphabetMultiplier];
     }
 

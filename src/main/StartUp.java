@@ -1,10 +1,8 @@
 package main;
-import bussinessLogic.Constants;
 import bussinessLogic.ManageArray;
 import bussinessLogic.ManageData;
 import bussinessLogic.ManageMap;
 import interfaces.ArrayManager;
-import interfaces.ConstantsInterface;
 import interfaces.DataManager;
 import interfaces.MapManager;
 import java.awt.*;
@@ -16,9 +14,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class StartUp {
-    private static final ConstantsInterface constant = new Constants();
     private static final MapManager manageMap = new ManageMap();
-    private static final ArrayManager manageArray = new ManageArray(manageMap, constant);
+    private static final ArrayManager manageArray = new ManageArray(manageMap);
     private static final DataManager manageData = new ManageData(manageArray, manageMap);
 
     private static final TextField textField = new TextField(10);
