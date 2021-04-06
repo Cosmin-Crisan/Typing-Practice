@@ -8,8 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ManageMap implements MapManager {
-    // the number of letters in the alphabet
-    private final int numberOfLetters = 3;
+
     // empty hash map for storing the alphabet and adding the reaction time for each
     // character
     LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
@@ -29,7 +28,7 @@ public class ManageMap implements MapManager {
         // Add elements to the map
         currentChar = 'a';
 
-        for (int i = 0; i < numberOfLetters; i++) {
+        for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {
             charString = Character.toString(currentChar);
             charMap.put(charString, 0);
             dividerMap.put(charString, 0);
@@ -93,7 +92,7 @@ public class ManageMap implements MapManager {
         currentChar = 'a';
         int average;
 
-        for (int i = 0; i < numberOfLetters; i++) {
+        for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {
             charString = Character.toString(currentChar);
             average = charMap.get(charString) / dividerMap.get(charString);
             charMap.put(charString, average);

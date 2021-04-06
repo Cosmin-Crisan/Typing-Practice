@@ -14,7 +14,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class StartUp {
-
     private static final MapManager manageMap = new ManageMap();
     private static final ArrayManager manageArray = new ManageArray(manageMap);
     private static final DataManager manageData = new ManageData(manageArray, manageMap);
@@ -30,10 +29,6 @@ public class StartUp {
     private static Panel controlPanel;
     // int for accessing the index of an array
     private static int charArrayIndex = 0;
-    // char for storing the current typed char
-    private static char typedChar;
-    // int for storing the elapsed time
-    private static int elapsedTime;
 
     public static void main(String[] args) {
         prepareGUI();
@@ -65,14 +60,15 @@ public class StartUp {
         mainFrame.add(headerLabel);
         mainFrame.add(controlPanel);
         mainFrame.add(statusLabel);
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 
 
     // calculates the reaction time
-    private static void calculateElapsedTime(Instant start, Instant end) {
+    private static int calculateElapsedTime(Instant start, Instant end) {
         Duration timeElapsed = Duration.between(start, end);
-        elapsedTime = (int) timeElapsed.toMillis();
+        return (int) timeElapsed.toMillis();
     }
 
 
@@ -83,13 +79,12 @@ public class StartUp {
         textField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
 
-                typedChar = e.getKeyChar();
+                char typedChar = e.getKeyChar();
                 end = Instant.now();
 
                 if (typedChar == array[charArrayIndex]) {
 
-                    calculateElapsedTime(start, end);
-                    manageMap.addTimeToMap(elapsedTime, typedChar);
+                    manageMap.addTimeToMap(calculateElapsedTime(start, end), typedChar);
                     manageMap.addDividerToMap(typedChar);
                     charArrayIndex++;
 

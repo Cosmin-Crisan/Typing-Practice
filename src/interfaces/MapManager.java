@@ -37,7 +37,7 @@ public interface MapManager {
     /**
      * calculates the average time for each char
      */
-    public void calculateAverage();
+    void calculateAverage();
 
     /**
      * return the sortedMap
