@@ -10,15 +10,10 @@ import java.util.stream.Collectors;
 public class ManageArray implements ArrayManager {
     // Random object for shuffling
     private static final Random RANDOM = new Random();
-    // numberOfLetters in the alphabet
-    private int numberOfLetters;
-    // int for calculating how many times a letter is displayed in the evaluation
-    // sequence
-    private int alphabetMultiplier;
     // hash map for storing and recording the sorted chars
     private final MapManager manageMap;
     // array for storing the letters needed in the evaluation phase
-    private char[] evaluationArray;
+    private char[] evaluationArray = new char[Constants.NUMBER_OF_LETTERS * Constants.ALPHABETMULTIPLIER];
     // array to store the shuffled letters
     private char[] shuffledArray;
     // array for transferring the chars from the sorted map and displaying them on
@@ -37,9 +32,6 @@ public class ManageArray implements ArrayManager {
      */
     public ManageArray(MapManager manageMap) {
         this.manageMap = manageMap;
-        this. numberOfLetters = Constants.NUMBER_OF_LETTERS;
-        this.alphabetMultiplier = Constants.ALPHABETMULTIPLIER;
-        this.evaluationArray = new char[numberOfLetters * alphabetMultiplier];
     }
 
     /**
@@ -49,8 +41,8 @@ public class ManageArray implements ArrayManager {
     public void setEvaluationArray() {
         currentChar = 'a';
 
-        for (int i = 0; i <= evaluationArray.length - alphabetMultiplier; i += alphabetMultiplier) {
-            for (int k = i; k < i + alphabetMultiplier; k++) {
+        for (int i = 0; i <= evaluationArray.length - Constants.ALPHABETMULTIPLIER; i += Constants.ALPHABETMULTIPLIER) {
+            for (int k = i; k < i + Constants.ALPHABETMULTIPLIER; k++) {
                 evaluationArray[k] = currentChar;
             }
             currentChar++;
@@ -91,7 +83,7 @@ public class ManageArray implements ArrayManager {
     public void setPracticeArray() {
 
         // calculate the size of the practiceArray
-        int sizeOfPracticeArray = numberOfLetters * (numberOfLetters + 1) / 2;
+        int sizeOfPracticeArray = Constants.NUMBER_OF_LETTERS * (Constants.NUMBER_OF_LETTERS + 1) / 2;
         // create the array
         practiceArray = new char[sizeOfPracticeArray];
         int index = 0;
