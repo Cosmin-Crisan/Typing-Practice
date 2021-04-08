@@ -3,19 +3,19 @@
  */
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import bussinessLogic.ManageMap;
+import org.hamcrest.collection.IsMapContaining;
+import org.junit.jupiter.api.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author dan.nicoara
  *
  */
 class ManageMapTest {
+
+	private ManageMap manageMap;
 
 	/**
 	 * @throws java.lang.Exception
@@ -36,6 +36,8 @@ class ManageMapTest {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
+		manageMap = new ManageMap();
+		manageMap.setNewCharMap();
 	}
 
 	/**
@@ -49,8 +51,12 @@ class ManageMapTest {
 	 * Test method for {@link bussinessLogic.ManageMap#addDividerToMap(char)}.
 	 */
 	@Test
+	@DisplayName("Simple map addition test")
 	void testAddDividerToMap() {
-		fail("Not yet implemented");
+		manageMap.addDividerToMap('a');
+
+		assertThat(manageMap.getDividerMap(), IsMapContaining.hasEntry("a", 1));
+
 	}
 
 }
