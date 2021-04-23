@@ -1,11 +1,28 @@
-package bussinessLogic;
+/*
+ * 
+ * key = letter
+ * value = (count, time)
+ * 
+ * LM = (key, value) -> (letter, (count, time))
+ * 
+ * 
+ * 
+ * TODO - Example of thod to write.
+ * public LinkedHashMap<String, LetterAttributes> calculateAverage(LinkedHashMap<String, LetterAttributes> map) {
+ * sort algorithm.
+ * }
+ * 
+ * */
 
-import interfaces.MapManager;
+
+package bussinessLogic;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import interfaces.MapManager;
 
 public class ManageMap implements MapManager {
 
@@ -16,17 +33,25 @@ public class ManageMap implements MapManager {
     // calculating the average)
     LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
     LinkedHashMap<String, Integer> sortedMap;
-    // current char
-    private char currentChar;
-    // create a string to store the chars when needed as string
-    private String charString;
+    
+    // TODO - use this instead of charMap, dividerMap and sortedMap.
+    //LinkedHashMap<String, LetterAttributes> map = new LinkedHashMap<>();
+    /**
+     *  
+     *  map.put("a", new LetterAttributes(0, 0));
+    	map.put("b", new LetterAttributes(0, 0));
+    	map.put("c", new LetterAttributes(0, 0));
+    	
+    	LetterAttributes la =  (LetterAttributes)map.get("a");
+     */
 
     /**
      * creates a new charMap and ads the chars to the map
      */
     public void setNewCharMap() {
+    	String charString;
         // Add elements to the map
-        currentChar = 'a';
+        char currentChar = 'a';
 
         for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {
             charString = Character.toString(currentChar);
@@ -68,9 +93,9 @@ public class ManageMap implements MapManager {
      */
 
     public void addDividerToMap(char typedChar) {
-        int divider = dividerMap.get(charString);
-        charString = Character.toString(typedChar);
-        dividerMap.put(charString, divider + 1);
+    	String typedCharacter = Character.toString(typedChar);
+        int divider = dividerMap.get(typedCharacter);
+        dividerMap.put(typedCharacter, divider + 1);
     }
 
     /**
@@ -80,16 +105,17 @@ public class ManageMap implements MapManager {
      * @param typedChar
      */
     public void addTimeToMap(int elapsedTime, char typedChar) {
-        charString = Character.toString(typedChar);
-        int sum = charMap.get(charString) + elapsedTime;
-        charMap.put(charString, sum);
+        String typedCharacter = Character.toString(typedChar);
+        int sum = charMap.get(typedCharacter) + elapsedTime;
+        charMap.put(typedCharacter, sum);
     }
 
     /**
      * calculates the average time for each char and stores it in charMap
      */
     public void calculateAverage() {
-        currentChar = 'a';
+    	String charString;
+        char currentChar = 'a';
         int average;
 
         for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {

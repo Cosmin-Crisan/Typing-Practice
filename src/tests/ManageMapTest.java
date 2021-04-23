@@ -3,11 +3,17 @@
  */
 package tests;
 
-import bussinessLogic.ManageMap;
-import org.hamcrest.collection.IsMapContaining;
-import org.junit.jupiter.api.*;
+import java.util.LinkedHashMap;
 
-import static org.junit.Assert.assertThat;
+import org.junit.Assert;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import bussinessLogic.ManageMap;
 
 /**
  * @author dan.nicoara
@@ -51,12 +57,79 @@ class ManageMapTest {
 	 * Test method for {@link bussinessLogic.ManageMap#addDividerToMap(char)}.
 	 */
 	@Test
-	@DisplayName("Simple map addition test")
-	void testAddDividerToMap() {
+	@DisplayName("Test manageMap.getDividerMap() with initial values")
+	void testGetDividerMapWithInitialValues() {
+		// Act
+		LinkedHashMap<String, Integer> actualResult = manageMap.getDividerMap();
+
+		// Assert
+		Assert.assertFalse(actualResult.isEmpty());
+
+		Assert.assertTrue(actualResult.containsKey("a"));
+		Assert.assertTrue(actualResult.containsKey("b"));
+		Assert.assertTrue(actualResult.containsKey("c"));
+
+		Assert.assertNotNull(actualResult.get("a"));
+		Assert.assertSame(actualResult.get("a"), 0);
+		Assert.assertNotNull(actualResult.get("b"));
+		Assert.assertSame(actualResult.get("b"), 0);
+		Assert.assertNotNull(actualResult.get("c"));
+		Assert.assertSame(actualResult.get("c"), 0);
+	}
+
+	/**
+	 * Test method for {@link bussinessLogic.ManageMap#addDividerToMap(char)}.
+	 */
+	@Test
+	@DisplayName("Test manageMap.getDividerMap() with one typed character")
+	void testGetDividerMapWithOneTypedCharacter() {
+		// Arrange
 		manageMap.addDividerToMap('a');
 
-		assertThat(manageMap.getDividerMap(), IsMapContaining.hasEntry("a", 1));
+		// Act
+		LinkedHashMap<String, Integer> actualResult = manageMap.getDividerMap();
 
+		// Assert
+		Assert.assertFalse(actualResult.isEmpty());
+
+		Assert.assertTrue(actualResult.containsKey("a"));
+		Assert.assertTrue(actualResult.containsKey("b"));
+		Assert.assertTrue(actualResult.containsKey("c"));
+
+		Assert.assertNotNull(actualResult.get("a"));
+		Assert.assertSame(actualResult.get("a"), 1);
+		Assert.assertNotNull(actualResult.get("b"));
+		Assert.assertSame(actualResult.get("b"), 0);
+		Assert.assertNotNull(actualResult.get("c"));
+		Assert.assertSame(actualResult.get("c"), 0);
+	}
+
+	/**
+	 * Test method for {@link bussinessLogic.ManageMap#addDividerToMap(char)}.
+	 */
+	@Test
+	@DisplayName("Test manageMap.getDividerMap() with two typed character")
+	void testGetDividerMapWithTwoTypedCharacter() {
+		// Arrange
+		manageMap.addDividerToMap('a');
+		manageMap.addDividerToMap('b');
+
+		// Act
+		LinkedHashMap<String, Integer> actualResult = manageMap.getDividerMap();
+
+		// Assert
+		Assert.assertFalse(actualResult.isEmpty());
+
+		Assert.assertTrue(actualResult.containsKey("a"));
+		Assert.assertTrue(actualResult.containsKey("b"));
+		Assert.assertTrue(actualResult.containsKey("c"));
+
+		Assert.assertNotNull(actualResult.get("a"));
+		Assert.assertSame(actualResult.get("a"), 1);
+		Assert.assertNotNull(actualResult.get("b"));
+		Assert.assertSame(actualResult.get("b"), 1);
+		Assert.assertNotNull(actualResult.get("c"));
+		Assert.assertSame(actualResult.get("c"), 0);
 	}
 
 }
