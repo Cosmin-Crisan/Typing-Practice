@@ -5,7 +5,6 @@ import interfaces.MapManager;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class ManageArray implements ArrayManager {
     // Random object for shuffling
@@ -13,11 +12,11 @@ public class ManageArray implements ArrayManager {
     // hash map for storing and recording the sorted chars
     private final MapManager manageMap;
     // array for storing the letters needed in the evaluation phase
-    private char[] evaluationArray = new char[Constants.NUMBER_OF_LETTERS * Constants.ALPHABETMULTIPLIER];
+    private final char[] evaluationArray = new char[Constants.NUMBER_OF_LETTERS * Constants.ALPHABETMULTIPLIER];
     // array to store the shuffled letters
     private char[] shuffledArray;
     // array for transferring the chars from the sorted map and displaying them on
-    private char[] charArrayFromSortedMap;
+    // private char[] charArrayFromSortedMap;
     // array for storing the letters needed in the practice phase
     private char[] practiceArray;
     // create a string to store the chars when needed as string
@@ -34,7 +33,6 @@ public class ManageArray implements ArrayManager {
 
     /**
      * generate an array containing all letters for a number of alphabetMultiplier times
-     *
      */
     public void setEvaluationArray() {
         char currentChar = 'a';
@@ -44,14 +42,15 @@ public class ManageArray implements ArrayManager {
                 evaluationArray[k] = currentChar;
             }
             currentChar++;
-        }     System.out.println(Arrays.toString(evaluationArray));
+        }
+        System.out.println(Arrays.toString(evaluationArray));
 
     }
 
     /**
      * shuffle the array
      *
-     * @param charArray
+     * @param charArray - the array that needs to be shuffled
      */
     public void shuffleCharArray(char[] charArray) {
         this.shuffledArray = charArray;
@@ -66,20 +65,11 @@ public class ManageArray implements ArrayManager {
     }
 
     /**
-     * transfer the sorted chars to a char array
-     */
-    public void setCharArrayFromSortedMap() {
-        charArrayFromSortedMap = manageMap.getSortedMap().keySet().stream().map(String::valueOf).collect(Collectors.joining())
-                .toCharArray();
-
-    }
-
-    /**
      * generate an array with characters repeating proportionally to the reaction
      * time for each char
      */
     public void setPracticeArray() {
-
+        char[] rankingArray = manageMap.getRankingArray();
         // calculate the size of the practiceArray
         int sizeOfPracticeArray = Constants.NUMBER_OF_LETTERS * (Constants.NUMBER_OF_LETTERS + 1) / 2;
         // create the array
@@ -87,9 +77,9 @@ public class ManageArray implements ArrayManager {
         int index = 0;
 
         //add the chars to the array depending on the reaction time (more chars for slower RT)
-        for (int i = 0; i < charArrayFromSortedMap.length; i++) {
+        for (int i = 0; i < rankingArray.length; i++) {
             for (int j = 0; j <= i; j++) {
-                practiceArray[index] = charArrayFromSortedMap[i];
+                practiceArray[index] = rankingArray[i];
                 index++;
             }
         }
@@ -115,7 +105,9 @@ public class ManageArray implements ArrayManager {
      * return the practice array
      */
     @Override
-    public char[] getPracticeArray(){return practiceArray;}
+    public char[] getPracticeArray() {
+        return practiceArray;
+    }
 
 
 }

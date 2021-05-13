@@ -13,40 +13,35 @@ public interface ArrayManager {
     /**
      * generate an array containing all letters for a number of alphabetMultiplier times
      */
-    public void setEvaluationArray();
+    void setEvaluationArray();
 
     /**
      * shuffle the array
      *
      * @param charArray - the array that needs to be shuffled
      */
-    public void shuffleCharArray(char[] charArray);
-
-    /**
-     * transfer the sorted chars to a char array
-     */
-    public void setCharArrayFromSortedMap();
+    void shuffleCharArray(char[] charArray);
 
     /**
      * generate an array with characters repeating proportionally to the reaction
      * time for each char
      */
-    public void setPracticeArray();
+    void setPracticeArray();
 
     /**
      * return the evaluation array
      */
-    public char[] getEvaluationArray();
+    char[] getEvaluationArray();
 
     /**
      * return the shuffled array
      */
-    public char[] getShuffledArray();
+    char[] getShuffledArray();
 
     /**
      * return the practice array
      */
-    public char[] getPracticeArray();
+    char[] getPracticeArray();
 
 
 }
