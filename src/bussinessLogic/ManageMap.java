@@ -17,32 +17,31 @@
 
 package bussinessLogic;
 
-import interfaces.MapManager;
-import models.LetterAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import interfaces.MapManager;
+
 public class ManageMap implements MapManager {
 
     // empty hash map for storing the alphabet and adding the reaction time for each
     // character
-    // LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
+    LinkedHashMap<String, Integer> charMap = new LinkedHashMap<>();
     // hash map for storing the number of times a char is displayed (needed for
     // calculating the average)
     LinkedHashMap<String, Integer> dividerMap = new LinkedHashMap<>();
     LinkedHashMap<String, Integer> sortedMap;
-
+    
     // TODO - use this instead of charMap, dividerMap and sortedMap.
-    LinkedHashMap<String, LetterAttributes> map = new LinkedHashMap<>();
-    LetterAttributes la =  (LetterAttributes)map.get("a");
+    //LinkedHashMap<String, LetterAttributes> map = new LinkedHashMap<>();
     /**
-     *
+     *  
      *  map.put("a", new LetterAttributes(0, 0));
     	map.put("b", new LetterAttributes(0, 0));
     	map.put("c", new LetterAttributes(0, 0));
-
+    	
     	LetterAttributes la =  (LetterAttributes)map.get("a");
      */
 
@@ -56,8 +55,7 @@ public class ManageMap implements MapManager {
 
         for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {
             charString = Character.toString(currentChar);
-            // charMap.put(charString, 0);
-            map.put(charString, new LetterAttributes(0, 0));
+            charMap.put(charString, 0);
             dividerMap.put(charString, 0);
             currentChar++;
         }
@@ -96,9 +94,8 @@ public class ManageMap implements MapManager {
 
     public void addDividerToMap(char typedChar) {
     	String typedCharacter = Character.toString(typedChar);
-        LetterAttributes la =  (LetterAttributes)map.get(typedCharacter);
-        int divider = la.getCount();
-        la.setCount(divider + 1);
+        int divider = dividerMap.get(typedCharacter);
+        dividerMap.put(typedCharacter, divider + 1);
     }
 
     /**
@@ -109,9 +106,8 @@ public class ManageMap implements MapManager {
      */
     public void addTimeToMap(int elapsedTime, char typedChar) {
         String typedCharacter = Character.toString(typedChar);
-        LetterAttributes la =  (LetterAttributes)map.get(typedCharacter);
-        int sum = la.getTime() + elapsedTime;
-        la.setTime(sum);
+        int sum = charMap.get(typedCharacter) + elapsedTime;
+        charMap.put(typedCharacter, sum);
     }
 
     /**
@@ -120,13 +116,12 @@ public class ManageMap implements MapManager {
     public void calculateAverage() {
     	String charString;
         char currentChar = 'a';
-        int averageTime;
+        int average;
 
         for (int i = 0; i < Constants.NUMBER_OF_LETTERS; i++) {
             charString = Character.toString(currentChar);
-            LetterAttributes la =  (LetterAttributes)map.get(charString);
-            averageTime = la.getTime() / la.getCount();
-            la.setTime(averageTime);
+            average = charMap.get(charString) / dividerMap.get(charString);
+            charMap.put(charString, average);
             currentChar++;
         }
     }
