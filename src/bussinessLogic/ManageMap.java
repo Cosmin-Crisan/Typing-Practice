@@ -47,6 +47,14 @@ public class ManageMap implements MapManager {
      */
 
     /**
+     * class constructor
+     */
+
+    public ManageMap() {
+        setNewCharMap();
+    }
+
+    /**
      * creates a new charMap and ads the chars to the map
      */
     public void setNewCharMap() {
