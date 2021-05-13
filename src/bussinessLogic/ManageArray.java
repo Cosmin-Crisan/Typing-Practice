@@ -22,8 +22,6 @@ public class ManageArray implements ArrayManager {
     private char[] practiceArray;
     // create a string to store the chars when needed as string
     private String charString;
-    // current char
-    private char currentChar;
 
     /**
      * constructor of the manageArray class
@@ -39,7 +37,7 @@ public class ManageArray implements ArrayManager {
      *
      */
     public void setEvaluationArray() {
-        currentChar = 'a';
+        char currentChar = 'a';
 
         for (int i = 0; i <= evaluationArray.length - Constants.ALPHABETMULTIPLIER; i += Constants.ALPHABETMULTIPLIER) {
             for (int k = i; k < i + Constants.ALPHABETMULTIPLIER; k++) {
