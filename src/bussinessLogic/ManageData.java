@@ -5,7 +5,7 @@ import interfaces.DataManager;
 import interfaces.MapManager;
 
 public class ManageData implements DataManager {
-    private final MapManager manageMap;
+    private MapManager manageMap;
     private final ArrayManager manageArray;
 
     public ManageData(ArrayManager manageArray, MapManager manageMap) {
@@ -19,7 +19,7 @@ public class ManageData implements DataManager {
     public void manageEvaluationData() {
         this.manageArray.setEvaluationArray();
         this.manageArray.shuffleCharArray(manageArray.getEvaluationArray());
-        this.manageMap.setNewCharMap();
+        this.manageMap = new ManageMap();
     }
 
     /**
@@ -30,7 +30,7 @@ public class ManageData implements DataManager {
         this.manageMap.sortCharMap();
         this.manageArray.setCharArrayFromSortedMap();
         // reset the charMap to store new data
-        this.manageMap.setNewCharMap();
+        this.manageMap = new ManageMap();
         this.manageArray.setPracticeArray();
         this.manageArray.shuffleCharArray(manageArray.getPracticeArray());
     }

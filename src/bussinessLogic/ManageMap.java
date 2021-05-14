@@ -57,7 +57,7 @@ public class ManageMap implements MapManager {
     /**
      * creates a new charMap and ads the chars to the map
      */
-    public void setNewCharMap() {
+    private void setNewCharMap() {
         String charString;
         // Add elements to the map
         char currentChar = 'a';
