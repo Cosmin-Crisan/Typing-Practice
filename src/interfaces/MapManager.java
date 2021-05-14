@@ -9,10 +9,6 @@ package interfaces;
 import java.util.LinkedHashMap;
 
 public interface MapManager {
-    /**
-     * create a new charMap and add the chars to the map
-     */
-    void setNewCharMap();
 
     /**
      * sort the charMap in ascending order

@@ -3,17 +3,11 @@
  */
 package tests;
 
-import java.util.LinkedHashMap;
-
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import bussinessLogic.ManageMap;
+import org.junit.Assert;
+import org.junit.jupiter.api.*;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author dan.nicoara
@@ -43,7 +37,6 @@ class ManageMapTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		manageMap = new ManageMap();
-		manageMap.setNewCharMap();
 	}
 
 	/**
