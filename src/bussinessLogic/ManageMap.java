@@ -53,7 +53,6 @@ public class ManageMap implements MapManager {
      * arranges each char relative to its correlated reaction time
      */
     public void rankChars() {
-
         rankingArray = new char[map.size()];
         int index = 0;
         // arrayList for storing and sorting the chars relative to the typing speed

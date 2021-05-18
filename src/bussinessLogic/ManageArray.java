@@ -15,12 +15,8 @@ public class ManageArray implements ArrayManager {
     private final char[] evaluationArray = new char[Constants.NUMBER_OF_LETTERS * Constants.ALPHABETMULTIPLIER];
     // array to store the shuffled letters
     private char[] shuffledArray;
-    // array for transferring the chars from the sorted map and displaying them on
-    // private char[] charArrayFromSortedMap;
     // array for storing the letters needed in the practice phase
     private char[] practiceArray;
-    // create a string to store the chars when needed as string
-    private String charString;
 
     /**
      * constructor of the manageArray class
@@ -79,8 +75,7 @@ public class ManageArray implements ArrayManager {
         //add the chars to the array depending on the reaction time (more chars for slower RT)
         for (int i = 0; i < rankingArray.length; i++) {
             for (int j = 0; j <= i; j++) {
-                practiceArray[index] = rankingArray[i];
-                index++;
+                practiceArray[index++] = rankingArray[i];
             }
         }
     }
