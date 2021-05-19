@@ -27,8 +27,7 @@ public class ManageData implements DataManager {
      */
     public void managePracticeData() {
         this.manageMap.calculateAverage();
-        this.manageMap.sortCharMap();
-        this.manageArray.setCharArrayFromSortedMap();
+        this.manageMap.rankChars();
         // reset the charMap to store new data
         this.manageMap.setNewCharMap();
         this.manageArray.setPracticeArray();

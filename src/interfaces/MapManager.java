@@ -6,8 +6,6 @@ package interfaces;
  * Creates maps and manages map data.
  */
 
-import java.util.LinkedHashMap;
-
 public interface MapManager {
     /**
      * create a new charMap and add the chars to the map
@@ -17,7 +15,7 @@ public interface MapManager {
     /**
      * sort the charMap in ascending order
      */
-    void sortCharMap();
+    void rankChars();
 
     /**
      * calculate how many times a char was deployed and store the result in a hashmap
@@ -40,17 +38,8 @@ public interface MapManager {
     void calculateAverage();
 
     /**
-     * return the sortedMap
+     * return the rankingArray
      */
-    LinkedHashMap<String, Integer> getSortedMap();
+    public char[] getRankingArray();
 
-    /**
-     * return the charMap
-     */
-    LinkedHashMap<String, Integer> getCharMap();
-
-    /**
-     * return the dividerMap
-     */
-    LinkedHashMap<String, Integer> getDividerMap();
 }
